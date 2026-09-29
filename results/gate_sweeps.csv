@@ -1,0 +1,17 @@
+panel,series,date,tau,public_lb,reference_lb
+gemma,"""count"", Dec 23-25",2024-12-24,0.02,0.661298,0.661298
+gemma,"""count"", Dec 23-25",2024-12-24,0.03,0.662998,0.661298
+gemma,"""count"", Dec 23-25",2024-12-25,0.04,0.664099,0.661298
+gemma,"""count"", Dec 23-25",2024-12-24,0.05,0.665399,0.661298
+gemma,"""count"", Dec 23-25",2024-12-25,0.06,0.664099,0.661298
+gemma,"""count"", Dec 23-25",2024-12-24,0.07,0.663499,0.661298
+gemma,"""count"", Dec 23-25",2024-12-23,0.10,0.660298,0.661298
+gemma,"""count"", Dec 23-25",2024-12-23,0.20,0.651195,0.661298
+gemma,"""count number"", Dec 27-28",2024-12-28,0.045,0.665399,0.661298
+gemma,"""count number"", Dec 27-28",2024-12-27,0.05,0.665899,0.661298
+qwen,"swap + extra-data checkpoint, 8,192 tokens",2025-02-02,0.01,0.703911,0.703811
+qwen,"swap + extra-data checkpoint, 8,192 tokens",2025-02-02,0.02,0.703611,0.703811
+qwen,"swap + extra-data checkpoint, 8,192 tokens",2025-01-27,0.05,0.703411,0.703811
+qwen,"swap + extra-data checkpoint, 8,192 tokens",2025-01-27,0.10,0.703010,0.703811
+qwen,"swap + extra-data checkpoint, 8,192 tokens",2025-01-27,0.20,0.702010,0.703811
+qwen,"final judge, 4,096 tokens (final 2)",2025-02-03,0.005,0.706011,0.705911

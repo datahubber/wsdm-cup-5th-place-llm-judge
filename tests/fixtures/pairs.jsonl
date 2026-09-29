@@ -1,0 +1,8 @@
+{"id": "r1", "prompt": "Say hi.", "response_a": "Hi there!", "response_b": "Hello.", "winner": "model_a", "language": "English"}
+{"id": "r2", "prompt": "列出三个数字", "response_a": "一共有 3 个，分别是 1 和 2", "response_b": "没有", "winner": "model_b", "language": "Chinese"}
+{"id": "r3", "prompt": "How long is the trip?", "response_a": "About 7 days.", "response_b": "Day 1: 3 km, day 2: 5 km.", "winner": "model_b", "language": "English"}
+{"id": "r4", "prompt": "Pick numbers.", "response_a": "Use 1, 2, 3, 4 or 5.", "response_b": "Between 10 and 20.", "winner": "model_a", "language": "English"}
+{"id": "r5", "prompt": "Which version?", "response_a": "Sure, happy to help!", "response_b": "Version 3.5", "winner": "model_a", "language": "English"}
+{"id": "r6", "prompt": "Which years?", "response_a": "In 2024 and 2025.", "response_b": "Pages 12-13", "winner": "model_b", "language": "English"}
+{"id": "r7", "prompt": "Сколько?", "response_a": "Около 10.", "response_b": "Не знаю.", "winner": "model_a", "language": "Russian"}
+{"id": "r8", "prompt": "Why?", "response_a": "Because.", "response_b": "It depends.", "winner": "model_b", "language": "English"}

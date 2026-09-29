@@ -1,0 +1,24 @@
+# environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# competition data, model outputs and weights never go in this repo
+# (the output patterns are anchored to the repo root so tests/fixtures/*.csv stays tracked)
+data/
+*.parquet
+/submission*.csv
+/logprobs*.csv
+*.safetensors
+*.bin
+
+# editors / OS
+.DS_Store
+.ipynb_checkpoints/
+.vscode/
+.idea/

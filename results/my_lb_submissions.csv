@@ -1,0 +1,62 @@
+date_utc,notebook,public_lb,description
+2024-11-30 16:28,wsdm-apply-previous-lmsys-solution,,Notebook WSDM apply previous LMSYS solution | Version 1
+2024-12-11 02:43,gemma-2-9b-4-bit-qlora-lb-0-63,0.636590,Notebook Gemma-2 9b 4-bit QLoRA - LB 0.63 | Version 1
+2024-12-11 05:27,wsdm-cup-ensemble-of-solutions,,Notebook WSDM Cup | Ensemble of solutions | Version 1
+2024-12-12 05:47,gemma-2-9b-4-bit-qlora-lb-0-63,0.637891,
+2024-12-12 05:47,gemma-2-9b-4-bit-qlora-lb-0-63,0.631789,
+2024-12-12 17:18,gemma-2-9b-4-bit-qlora-lb-0-63,0.635290,
+2024-12-12 17:18,gemma-2-9b-4-bit-qlora-lb-0-63,0.636991,
+2024-12-12 23:03,gemma-2-9b-4-bit-qlora-lb-0-63,0.636290,max_length = 512*7
+2024-12-23 17:36,improved-weights,0.661298,Notebook ❄️ Improved Weights ❄️ | Version 1
+2024-12-23 23:07,improved-weights,0.660298,diff > 0.1 else count
+2024-12-23 23:13,improved-weights,0.651195,diff > 0.2 else count
+2024-12-23 23:23,improved-weights,0.635290,"count > 2 * other, else llm"
+2024-12-23 23:23,improved-weights,0.641392,"count > 3 * other, else llm"
+2024-12-24 03:42,improved-weights,0.655696,"count > 10 * other, else llm"
+2024-12-24 03:43,improved-weights,0.662998,"diff > 0.03, else count"
+2024-12-24 16:48,improved-weights,0.661298,diff > 0.02 else count
+2024-12-24 16:48,improved-weights,0.665399,diff > 0.05 else count
+2024-12-24 22:42,improved-weights,0.663499,"diff > 0.07, else count"
+2024-12-25 03:37,improved-weights,0.664099,"diff > 0.04, else count"
+2024-12-25 03:37,improved-weights,0.664099,diff > 0.06 else count
+2024-12-25 08:49,improved-weights,0.660998,diff < 0.07 and count > 10
+2024-12-25 08:49,improved-weights,0.661098,diff < 0.05 and count > 10
+2024-12-25 08:56,improved-weights,0.661098,diff > 0.07 and count > 10 (version 13 is count > 8)
+2024-12-26 00:10,improved-weights,0.660598,diff < 0.1 and count > 3*
+2024-12-26 00:16,improved-weights,0.663999,v9 + only count 4 notations
+2024-12-26 04:56,improved-weights,0.663298,diff < 0.08 and count > 1.5 *
+2024-12-26 09:15,improved-weights,0.663198,"diff > 0.05, else count positive"
+2024-12-26 09:33,improved-weights,0.664499,v9 + updated notation checklist
+2024-12-27 00:16,improved-weights,0.664399,diff > 0.05 else count char
+2024-12-27 00:18,improved-weights,0.665899,diff > 0.05 else count number
+2024-12-27 00:22,improved-weights,0.662998,diff > 0.05 else count word
+2024-12-27 00:33,improved-weights,0.660398,diff > 0.05 else count average word length
+2024-12-27 06:19,improved-weights,,"diff > 0.05 and winner > 0.2, else count number, else count checklist"
+2024-12-28 01:08,improved-weights,,diff > 0.05 else decision tree on 5 features
+2024-12-28 01:09,improved-weights,,diff > 0.1 else decision tree on 5 features
+2024-12-28 01:59,improved-weights,,diff > 0.1 else DT 5 features
+2024-12-28 19:02,wsdm-cup-lb-0-684-only-gemma-2-9b-4-bit,,Notebook [WSDM Cup] LB:0.684 Only Gemma-2 9b 4-bit | Version 1
+2024-12-28 21:51,improved-weights,0.665399,diff > 0.045 else count number
+2024-12-29 20:08,vllm-qwen2-5-14b,0.690607,max_length = 16384
+2024-12-29 20:16,vllm-qwen2-5-14b,0.689706,qwen2.5-14b-lora(max=8192)
+2024-12-29 20:22,vllm-qwen2-5-14b,0.690607,qwen2.5-14b-lora(max=15000)
+2024-12-31 23:51,vllm-qwen2-5-14b-c14508,,vLLM _ Qwen2.5-14B c14508（post processing: diff > 0.05 else count numbers)
+2024-12-31 23:56,vllm-qwen2-5-14b-c14508,0.691707,vLLM _ Qwen2.5-14B c14508(updated winner function)
+2025-01-03 09:03,vllm-qwen2-5-14b-362ffe,,vLLM _ Qwen2.5-14B(post processing: diff < 0.05 then count number)
+2025-01-03 09:22,vllm-qwen2-5-14b-362ffe,,vLLM _ Qwen2.5-14B (post processing: diff < 0.05 then count number)
+2025-01-03 18:33,vllm-qwen2-5-14b-362ffe,,vLLM _ Qwen2.5-14B (diff < 0.05 then count number)
+2025-01-03 23:53,vllm-qwen2-5-14b-362ffe,0.562468,vLLM _ Qwen2.5-14B (diff < 0.05 then count number)
+2025-01-03 23:58,vllm-qwen2-5-14b-362ffe,,test
+2025-01-12 23:52,vllm-qwen2-5-14b-7e14d9,,test
+2025-01-12 23:58,vllm-qwen2-5-14b-7e14d9,,softmax test
+2025-01-13 02:20,vllm-qwen2-5-14b-7e14d9,0.694808,post processing: diff > 0.05 else count number
+2025-01-13 02:53,vllm-qwen2-5-14b-7e14d9,0.692707,post processing: diff > 0.08 else count number
+2025-01-13 07:33,vllm-qwen2-5-14b-7e14d9,0.695908,0.02
+2025-01-19 05:02,vllm-qwen2-5-14b-7e14d9,,post processing: vote on 3 count
+2025-01-26 23:53,vllm-qwen2-5-14b-2ef57b,,Notebook vLLM _ Qwen2.5-14B 2ef57b | Version 1
+2025-01-27 01:41,vllm-qwen2-5-14b-2ef57b,0.703010,post processing logit difference threshold 0.1
+2025-01-27 21:25,vllm-qwen2-5-14b-2ef57b,0.703411,logit threshold 0.05
+2025-01-27 21:26,vllm-qwen2-5-14b-2ef57b,0.702010,logit threshold 0.2
+2025-02-02 23:54,vllm-qwen2-5-14b-2ef57b,,test
+2025-02-02 23:56,vllm-qwen2-5-14b-2ef57b,0.703611,logit threshold 0.02
+2025-02-02 23:58,vllm-qwen2-5-14b-2ef57b,0.703911,0.01
