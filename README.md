@@ -3,9 +3,11 @@
 [![ci](https://github.com/datahubber/wsdm-cup-5th-place-llm-judge/actions/workflows/ci.yml/badge.svg)](https://github.com/datahubber/wsdm-cup-5th-place-llm-judge/actions/workflows/ci.yml)
 
 Predict which of two chatbot responses a human voter preferred, across many languages. Our
-five-person team finished 5th of 950 (gold). This repo is my part of that solution: the inference
-pipeline that serves our fine-tuned Qwen2.5-14B judge, an uncertainty-gated post-processor, and an
-analysis of what the human preference labels actually reward.
+five-person team finished 5th of 950 (gold, top 0.5%). My part: the judge's input and label
+functions (head+tail truncation, A/B response swap, soft labels), the post-processing strategies that
+combine the judge's probabilities with content features, and the vLLM inference that serves the
+fine-tuned Qwen2.5-14B judge. This repo rebuilds the inference and post-processing side as a tested
+package, with an analysis of what the human preference labels actually reward.
 
 ![Gate gain versus threshold on two models, and digit-run versus length rule accuracy per length bin](assets/results.png)
 
@@ -17,12 +19,22 @@ Numbers: [`docs/leaderboard_log.md`](docs/leaderboard_log.md),
 
 ## TL;DR
 
-- **Judge.** Qwen2.5-14B-Instruct with a LoRA adapter answers each pair with one token, "A" or "B".
-  I serve it with vLLM on Kaggle's 2× T4 (fp16, tensor parallel 2, CPU offload, prefix caching) and
-  turn the A/B log-probs into a calibrated preference margin.
-- **Post-processing.** When the judge is within a hair of a coin flip (|margin| < τ), a content
-  feature breaks the tie. On the Gemma-2 baseline this added +46 public rows (+0.46 pp); on the final
-  judge it is neutral, because a well-trained judge is rarely that uncertain.
+- **Judge inputs and labels.** I added head+tail truncation (the start and end of the query and of
+  each response stay inside the token budget), A/B response swap (every pair in both orders, so the
+  judge cannot learn position bias) and soft labels (smoothed targets plus soft pseudo-labels from
+  the stage-1 judge). The training steps that added them gained +0.0031, +0.0029 and +0.0030 public
+  LB, on the way from 0.691 to 0.707 ([`docs/training_notes.md`](docs/training_notes.md)).
+- **Judge and serving.** Qwen2.5-14B-Instruct with a 16-bit LoRA adapter answers each pair with one
+  token, "A" or "B". I serve it with vLLM on Kaggle's 2× T4 (fp16, tensor parallel 2, CPU offload,
+  prefix caching) and turn the A/B log-probs into a calibrated preference margin. It beat the best 4-bit
+  QLoRA Gemma-2-9B baseline I ran first (0.661 public) by 3.0 to 4.6 points while still fitting the
+  2× T4 budget (about 4.5 h for the test set). Final 2 ran through my inference notebook:
+  0.712582 private, gold.
+- **Post-processing.** I tried over 30 post-processing strategies that combine the judge's probability
+  with content features (digit runs, characters, words, a 5-feature decision tree, votes). The best
+  is an uncertainty gate: when the judge is within a hair of a coin flip (|margin| < τ), the response
+  with more digit runs wins. On the Gemma-2 baseline this added +46 public rows (+0.46 pp); on the
+  final judge it is neutral, because a well-trained judge is rarely that uncertain.
 - **Finding.** The human labels carry a strong verbosity bias: "the longer answer wins" is right
   58.4 % of the time on its own, and the digit-count heuristic mostly tracks length. That helps
   predict votes, and it is exactly the bias a reward model should not learn.
@@ -31,10 +43,10 @@ Numbers: [`docs/leaderboard_log.md`](docs/leaderboard_log.md),
 
 | Submission | Public LB | Private LB |
 |---|---|---|
-| Final 1: fine-tuned judge, argmax | 0.706812 | **0.712627** (5th / 950) |
+| Final 1: fine-tuned judge (16-bit LoRA), argmax | 0.706812 | **0.712627** (5th / 950) |
 | Final 2: fine-tuned judge through my inference notebook, with the gate (τ = 0.005) | 0.706011 | **0.712582** |
 | Reference: Qwen2.5-14B-Instruct zero-shot (best of 3) | 0.625387 | |
-| Reference: Gemma-2-9B baseline, without / with my gate | 0.661298 / 0.665899 | |
+| Reference: Gemma-2-9B 4-bit QLoRA baseline, without / with my gate | 0.661298 / 0.665899 | |
 
 Both finals land in the gold zone and differ by one or two private rows. The public split has 9,997
 rows, so one row is 0.0001 accuracy. The judge's training progression (0.691 → 0.707 public) is in
@@ -147,14 +159,15 @@ tests/            46 tests on synthetic fixtures, including predict.py against a
 
 Team "Just doing", five members, 5th of 950.
 
-- **Albert Wang** (Kaggle `mianwang1024`): owned the inference notebook behind final 2 (vLLM
-  serving on 2× T4, A/B log-prob extraction, head+tail truncation in the training format); designed
-  and tested the uncertainty-gated post-processor; made 61 of the team's leaderboard submissions;
+- **Albert Wang** (Kaggle `mianwang1024`): added the judge's input and label functions (head+tail
+  truncation, A/B response swap, soft labels); owned the inference notebook behind final 2 (vLLM
+  serving on 2× T4, A/B log-prob extraction); designed and tested the post-processing strategies,
+  including the uncertainty gate; made 61 of the team's leaderboard submissions;
   wrote the [public solution write-up](https://www.kaggle.com/competitions/wsdm-cup-multilingual-chatbot-arena/discussion/567724)
   and presented the solution on the competition's winners' call. For this repo: the tested package
   and the length-bias analysis.
-- **Chen Yulin**: training pipeline and the fine-tuned judge
-  ([code](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm)).
+- **Chen Yulin**: ran the fine-tuning (training pipeline, training runs and the final judge;
+  [code](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm)).
 - **Other teammates**: baselines, a separate ensemble line, and training compute.
 - **c0ldzy**: the public Gemma-2 notebook "Improved Weights", the gate's first baseline.
 

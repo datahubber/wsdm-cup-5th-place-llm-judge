@@ -1,6 +1,6 @@
 # The judge: training notes
 
-Teammate Chen Yulin fine-tuned the Qwen2.5-14B judge and ran every experiment on this page. His code is public at [lcy80366872/kaggle-project/wsdm](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm). It builds on Raja Biswas's MIT-licensed [Eedi 1st-place scaffold](https://github.com/rbiswasfc/eedi-mining-misconceptions). This summary comes from his code, his run configs, the team's submission list (Kaggle API, pulled 2026-09-29) and the team's documentation. The training code is not in this repo; this page is here so the inference side makes sense.
+Teammate Chen Yulin ran the fine-tuning of the Qwen2.5-14B judge and every training run on this page. I added the head+tail truncation, the A/B response swap and the soft labels: the three steps marked "added by me" below. The training code is public in his repo [lcy80366872/kaggle-project/wsdm](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm). It builds on Raja Biswas's MIT-licensed [Eedi 1st-place scaffold](https://github.com/rbiswasfc/eedi-mining-misconceptions). This summary comes from his code, his run configs, the team's submission list (Kaggle API, pulled 2026-09-29) and the team's documentation. The training code is not in this repo; this page is here so the inference side makes sense.
 
 ## Leaderboard progression (public LB)
 
@@ -8,10 +8,10 @@ Teammate Chen Yulin fine-tuned the Qwen2.5-14B judge and ran every experiment on
 |---|---|---|
 | Qwen2.5-14B-Instruct zero-shot, 3 runs | 0.598179–0.625387 | 2024-12-28 |
 | + LoRA judge | 0.690707 | 2024-12-28 |
-| + head+tail truncation to 8,192 tokens | 0.693808 | 2025-01-01 |
-| + A/B swap augmentation (WSDM data) | 0.696709 | 2025-01-24 |
+| + head+tail truncation to 8,192 tokens (added by me) | 0.693808 | 2025-01-01 |
+| + A/B response swap (WSDM data; added by me) | 0.696709 | 2025-01-24 |
 | + LMSYS and extra preference data (with swap) | 0.703811 | 2025-01-26 |
-| + stage 2: smoothed labels and soft pseudo-labels (as the team documentation describes it) | 0.706812 | 2025-02-03 |
+| + stage 2: smoothed labels and soft pseudo-labels (added by me) | 0.706812 | 2025-02-03 |
 | **Private LB**, same model | **0.712627** | rerun 2025-03-10 |
 
 This is not a clean ablation. Each step changed data, training or truncation at once, and every step was chosen on the public LB.
@@ -23,10 +23,10 @@ This is not a clean ablation. Each step changed data, training or truncation at 
 - **Model.** Qwen2.5-14B-Instruct with LoRA (r = 64, α = 128, dropout 0.01) on all attention and MLP projections, trained in 16-bit precision. The final model used no 4-bit quantization.
 - **Head.** There is no classifier head. The loss is a 2-way cross-entropy over the LM logits of "A" and "B" at the last position, so vLLM serves the merged model as a plain causal LM.
 - **Optimisation.** 8-bit AdamW, LR 1e-5 for LoRA A and 5e-5 for LoRA B, cosine decay to 10 % after 2 % warmup, one epoch.
-- **Stage 2 (per the team documentation).**
+- **Stage 2: soft labels.**
   - The stage-1 model's A/B probabilities on 26,468 unlabelled pairs become soft pseudo-labels.
   - The model is retrained on the labelled pairs with smoothed 0.95/0.05 targets, plus the pseudo-labelled pairs.
-  - This target construction is not in the public code release, so the 0.703 → 0.706 step cannot be reproduced from it.
+  - This target construction is not in the teammate's public code release, so the 0.703 → 0.706 step cannot be reproduced from it.
 
 ## Compute
 
