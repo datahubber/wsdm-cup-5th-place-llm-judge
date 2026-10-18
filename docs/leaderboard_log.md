@@ -50,7 +50,7 @@ Together with Sweep A (10 runs) and the three other fallback features, that make
 
 ## Fine-tuned Qwen2.5-14B judge
 
-My first runs of the teammate's early LoRA checkpoint (`qwen2-5-14b-inferab`), 2024-12-29 to 2024-12-31, scored 0.689706–0.691707. Their descriptions mention only token limits or the label function, not a gate.
+My first runs of the team's early LoRA checkpoint (`qwen2-5-14b-inferab`), 2024-12-29 to 2024-12-31, scored 0.689706–0.691707. Their descriptions mention only token limits or the label function, not a gate.
 
 ### Sweep B: swap + extra-data checkpoint (2025-01-27 and 2025-02-02)
 
@@ -78,7 +78,7 @@ The two finals differ in prompt length as well as the gate. Their 1–2-row priv
 
 ### Excluded: the 2025-01-13 sweep
 
-This sweep ran on one of the teammate's chain-of-thought multi-task checkpoints. It scored 0.694808, 0.692707 and 0.695908 at τ = 0.05, 0.08 and 0.02. I cannot tell which checkpoint it used, and the teammate's no-gate runs of that family up to that date span 0.694008–0.697309. The saved (latest) version of that notebook also gates on a two-way softmax probability difference, with a vote over several counts, not on the log-prob margin. The sweep is left out of all conclusions. Three more runs of that notebook have no score: "test" and "softmax test" (2025-01-12) and "post processing: vote on 3 count" (2025-01-19).
+This sweep ran on one of the team's chain-of-thought multi-task checkpoints. It scored 0.694808, 0.692707 and 0.695908 at τ = 0.05, 0.08 and 0.02. I cannot tell which checkpoint it used, and the teammate's no-gate runs of that family up to that date span 0.694008–0.697309. The saved (latest) version of that notebook also gates on a two-way softmax probability difference, with a vote over several counts, not on the log-prob margin. The sweep is left out of all conclusions. Three more runs of that notebook have no score: "test" and "softmax test" (2025-01-12) and "post processing: vote on 3 count" (2025-01-19).
 
 ### Excluded: other Qwen gate runs (2024-12-31 and 2025-01-03)
 

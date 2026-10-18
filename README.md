@@ -4,7 +4,8 @@
 
 Predict which of two chatbot responses a human voter preferred, across many languages. Our
 five-person team finished 5th of 950 (gold, top 0.5%). My part: the judge's input and label
-functions (head+tail truncation, A/B response swap, soft labels), the post-processing strategies that
+functions (head+tail truncation, A/B response swap, soft labels), fine-tuning runs of the judge
+together with teammate Chen Yulin, the post-processing strategies that
 combine the judge's probabilities with content features, and the vLLM inference that serves the
 fine-tuned Qwen2.5-14B judge. This repo rebuilds the inference and post-processing side as a tested
 package, with an analysis of what the human preference labels actually reward.
@@ -160,14 +161,15 @@ tests/            46 tests on synthetic fixtures, including predict.py against a
 Team "Just doing", five members, 5th of 950.
 
 - **Albert Wang** (Kaggle `mianwang1024`): added the judge's input and label functions (head+tail
-  truncation, A/B response swap, soft labels); owned the inference notebook behind final 2 (vLLM
+  truncation, A/B response swap, soft labels) and ran fine-tuning runs of the judge together with
+  Chen Yulin; owned the inference notebook behind final 2 (vLLM
   serving on 2× T4, A/B log-prob extraction); designed and tested the post-processing strategies,
   including the uncertainty gate; made 61 of the team's leaderboard submissions;
   wrote the [public solution write-up](https://www.kaggle.com/competitions/wsdm-cup-multilingual-chatbot-arena/discussion/567724)
   and presented the solution on the competition's winners' call. For this repo: the tested package
   and the length-bias analysis.
-- **Chen Yulin**: ran the fine-tuning (training pipeline, training runs and the final judge;
-  [code](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm)).
+- **Chen Yulin**: built the training pipeline and ran fine-tuning runs of the judge together with me
+  ([code](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm)).
 - **Other teammates**: baselines, a separate ensemble line, and training compute.
 - **c0ldzy**: the public Gemma-2 notebook "Improved Weights", the gate's first baseline.
 

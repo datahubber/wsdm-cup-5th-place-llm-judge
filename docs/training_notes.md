@@ -1,6 +1,6 @@
 # The judge: training notes
 
-Teammate Chen Yulin ran the fine-tuning of the Qwen2.5-14B judge and every training run on this page. I added the head+tail truncation, the A/B response swap and the soft labels: the three steps marked "added by me" below. The training code is public in his repo [lcy80366872/kaggle-project/wsdm](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm). It builds on Raja Biswas's MIT-licensed [Eedi 1st-place scaffold](https://github.com/rbiswasfc/eedi-mining-misconceptions). This summary comes from his code, his run configs, the team's submission list (Kaggle API, pulled 2026-09-29) and the team's documentation. The training code is not in this repo; this page is here so the inference side makes sense.
+Teammate Chen Yulin and I both ran the fine-tuning runs of the Qwen2.5-14B judge. He built the training pipeline; I added the head+tail truncation, the A/B response swap and the soft labels: the three steps marked "added by me" below. The training code is public in his repo [lcy80366872/kaggle-project/wsdm](https://github.com/lcy80366872/kaggle-project/tree/main/wsdm). It builds on Raja Biswas's MIT-licensed [Eedi 1st-place scaffold](https://github.com/rbiswasfc/eedi-mining-misconceptions). This summary comes from the training code, the team's run configs, the team's submission list (Kaggle API, pulled 2026-09-29) and the team's documentation. The training code is not in this repo; this page is here so the inference side makes sense.
 
 ## Leaderboard progression (public LB)
 
